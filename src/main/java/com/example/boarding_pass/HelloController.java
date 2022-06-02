@@ -1,6 +1,9 @@
 package com.example.boarding_pass;
 
 
+import classes.Locations;
+import classes.Passenger;
+import classes.TravelTimes;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
@@ -8,7 +11,6 @@ import javafx.scene.layout.GridPane;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -16,8 +18,9 @@ import java.util.Scanner;
 import static javafx.collections.FXCollections.observableArrayList;
 
 public class HelloController {
-    private ArrayList<String[]> strLocationArrayList = new ArrayList<>();
-
+     Locations Locations;
+     TravelTimes tTimes;
+     Passenger passenger;
     public GridPane flightEstimateBox;
     public Label outputFlightTime;
     public Label outputArrivalTime;
@@ -46,7 +49,7 @@ public class HelloController {
     @FXML
     private ChoiceBox<String> inputDestination;
     @FXML
-    private ChoiceBox<LocalTime> inputDepartTime;
+    private ChoiceBox<String> inputDepartTime;
     @FXML
     private Button estimate_btn;
 
@@ -54,59 +57,63 @@ public class HelloController {
 
 
     public void initialize(){
-        parseLocationsText();
-        
-        
-        
-        
-        ArrayList<String> originNameList = new ArrayList<>();
-        assignOriginNames(originNameList);
-        inputOrigin.getItems().addAll(observableArrayList(originNameList));
-        
-        ArrayList<String> destNameList = new ArrayList<>();
-        assignDestNames(destNameList, originNameList);
-        inputDestination.getItems().addAll(destNameList);
+        Locations locations = new Locations();
+        TravelTimes tTimes = new TravelTimes();
+        Passenger passenger = new Passenger();
+
+
+
+        inputGenderSelection.getItems().addAll("Male", "Female");
+
+        inputOrigin.getItems().addAll(observableArrayList(locations.locationNamesList()));
+        inputDestination.getItems().addAll(observableArrayList(locations.locationNamesList()));
+        inputDepartTime.getItems().addAll(observableArrayList(tTimes.listOfDepartureTimes()));
 
     }
     
+
+
+    public void onEstimateButtonPress(MouseEvent mouseEvent) {
+        int validInputs = 0;
+
+        if(inputName.getText().isEmpty()){
+            inputName.requestFocus();
+        }else{
+           validInputs++;
+        }
+
+        if(inputAge.getText().isEmpty() || !inputAge.getText().matches("\\d*")){
+            inputAge.setText("");
+            inputAge.requestFocus();
+        }else{
+            validInputs++;
+        }
+
+        if(inputGenderSelection.getValue() == null){
+           inputGenderSelection.requestFocus();
+        }else{
+            validInputs++;
+        }
+        
+        
+
+
+        if (validInputs == 9){
+            passenger.setName(inputName.getText());
+            passenger.setAge(Integer.parseInt(inputAge.getText()));
+            passenger.setGender((inputGenderSelection.getValue().toLowerCase()));
+            passenger.setPhoneNum(inputPhoneNumber.getText());
+
+
+            flightEstimateBox.setOpacity(1);
+
+        }
+
+    }
+
     public void onBookFlightButtonPress(MouseEvent mouseEvent) {
     }
 
-    public void onEstimateButtonPress(MouseEvent mouseEvent) {
-        if (flightEstimateBox.getOpacity() == 0){
-            flightEstimateBox.setOpacity(1);
-        }
 
-    }
 
-    public void parseLocationsText(){
-        String callFileStr;
-        try {
-            File callFile = new File("src/main/resources/locations.txt");
-            Scanner reader = new Scanner(callFile);
-            while (reader.hasNextLine()) {
-                callFileStr = reader.nextLine();
-                String[] textLine = callFileStr.split(",");
-                strLocationArrayList.add(textLine);
-            }
-            reader.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-    
-    private void assignOriginNames(ArrayList<String> originNameList) {
-        for (String[] strItem : strLocationArrayList){
-            String newPlace =   strItem[1] + ", " + strItem[0];
-            originNameList.add(newPlace);
-        }
-        Collections.sort(originNameList);
-    }
-
-    private void assignDestNames(ArrayList<String> destNameList,
-                                 ArrayList<String> originNameList) {
-        for(String oL : originNameList){
-                destNameList.add(oL);
-        }
-    }
 }
