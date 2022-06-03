@@ -60,7 +60,7 @@
                   <ChoiceBox fx:id="inputOrigin" prefHeight="25.0" prefWidth="198.0" GridPane.columnIndex="2" GridPane.rowIndex="8" />
 
 
-                        <ChoiceBox fx:id="inputDepartTime" prefHeight="26.0" prefWidth="194.0" GridPane.columnIndex="2" GridPane.rowIndex="10" />
+                        <ChoiceBox fx:id="inputDepartTime" prefHeight="24.0" prefWidth="201.0" GridPane.columnIndex="2" GridPane.rowIndex="10" />
                         <Button fx:id="estimate_btn" contentDisplay="RIGHT" mnemonicParsing="false" onMouseClicked="#onEstimateButtonPress" prefHeight="24.0" prefWidth="94.0" text="Estimate Flight" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="11" />
                         <Label text="Name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label text="Passenger Info:" GridPane.columnIndex="1">

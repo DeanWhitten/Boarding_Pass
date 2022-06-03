@@ -8,7 +8,11 @@ public class Passenger {
     private String email;
 
     public void passenger(){
-
+        this.name =name;
+        this.age = age;
+        this.gender = gender;
+        this.phoneNum =phoneNum;
+        this.email = email;
     }
 
     public String getName() {

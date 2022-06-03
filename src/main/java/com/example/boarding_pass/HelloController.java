@@ -1,6 +1,7 @@
 package com.example.boarding_pass;
 
 
+import classes.Flight;
 import classes.Locations;
 import classes.Passenger;
 import classes.TravelTimes;
@@ -9,18 +10,18 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Scanner;
+
+import java.time.LocalTime;
+
 
 import static javafx.collections.FXCollections.observableArrayList;
 
 public class HelloController {
-     Locations Locations;
-     TravelTimes tTimes;
-     Passenger passenger;
+     Locations locations = new Locations();
+     TravelTimes tTimes = new TravelTimes();
+     Passenger passenger = new Passenger();
+     Flight flight = new Flight();
+
     public GridPane flightEstimateBox;
     public Label outputFlightTime;
     public Label outputArrivalTime;
@@ -57,11 +58,6 @@ public class HelloController {
 
 
     public void initialize(){
-        Locations locations = new Locations();
-        TravelTimes tTimes = new TravelTimes();
-        Passenger passenger = new Passenger();
-
-
 
         inputGenderSelection.getItems().addAll("Male", "Female");
 
@@ -95,18 +91,58 @@ public class HelloController {
             validInputs++;
         }
         
-        
+       if(inputPhoneNumber.getText().isEmpty() || !inputPhoneNumber.getText().matches("\\d*") || inputPhoneNumber.getText().length() != 10){
+           inputPhoneNumber.setText("");
+           inputPhoneNumber.requestFocus();
+       }else{
+           validInputs++;
+       }
 
+       if(inputEmail.getText().isEmpty() || !(inputEmail.getText().contains("@") && inputEmail.getText().contains("."))){
+         inputEmail.setText("");
+         inputEmail.requestFocus();
+       }else{
+           validInputs++;
+       }
+
+       if(inputDate.getValue() == null){
+           inputDate.requestFocus();
+       }else{
+           validInputs++;
+       }
+
+       if(inputOrigin.getValue() == null){
+           inputOrigin.requestFocus();
+       }else{
+           validInputs++;
+       }
+
+       if (inputDestination.getValue() == null || inputDestination.getValue().equals(inputOrigin.getValue()) ){
+           inputDestination.setValue(null);
+           inputDestination.requestFocus();
+       }else{
+           validInputs++;
+       }
+
+       if(inputDepartTime.getValue() == null){
+           inputDepartTime.requestFocus();
+       }else {
+           validInputs++;
+       }
 
         if (validInputs == 9){
             passenger.setName(inputName.getText());
             passenger.setAge(Integer.parseInt(inputAge.getText()));
             passenger.setGender((inputGenderSelection.getValue().toLowerCase()));
             passenger.setPhoneNum(inputPhoneNumber.getText());
+            passenger.setEmail(inputEmail.getText());
 
+            flight.setDate(inputDate.getValue());
+            flight.setOrigin(inputOrigin.getValue());
+            flight.setDestination(inputDestination.getValue());
+            flight.setDepartTime(LocalTime.parse(inputDepartTime.getValue()));
 
             flightEstimateBox.setOpacity(1);
-
         }
 
     }
