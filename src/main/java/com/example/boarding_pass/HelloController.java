@@ -142,6 +142,13 @@ public class HelloController {
             flight.setDestination(inputDestination.getValue());
             flight.setDepartTime(LocalTime.parse(inputDepartTime.getValue()));
 
+            flight.setOriginLAT(locations.findLocationLAT(flight.getOrigin()));
+            flight.setOriginLONG(locations.findLocationLONG(flight.getOrigin()));
+            flight.setDestinationLAT(locations.findLocationLAT(flight.getDestination()));
+            flight.setDestinationLONG(locations.findLocationLONG(flight.getDestination()));
+
+            System.out.println(flight.getOriginLAT() + " " + flight.getOriginLONG());
+
             flightEstimateBox.setOpacity(1);
         }
 

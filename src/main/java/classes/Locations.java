@@ -40,7 +40,33 @@ public class Locations {
         return nameList;
     }
 
+    public double findLocationLAT(String locationName){
+       // index 2
+        String[] locationNameArr = locationName.split(",");
 
+        double LAT = 0.0;
+
+        for(String[] strItem : strLocationArrayList){
+            if(locationNameArr[0].equals(strItem[1])){
+               LAT = Double.parseDouble(strItem[2]);
+            }
+        }
+        return LAT;
+    }
+
+    public double findLocationLONG(String locationName){
+       //index 3
+        String[] locationNameArr = locationName.split(",");
+
+        double LONG = 0.0;
+
+        for(String[] strItem : strLocationArrayList){
+            if(locationNameArr[0].equals(strItem[1])){
+                LONG = Double.parseDouble(strItem[3]);
+            }
+        }
+        return LONG;
+    }
 
 
 }

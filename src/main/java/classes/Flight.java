@@ -9,15 +9,16 @@ public class Flight {
     private String destination;
     private LocalTime departTime;
 
+    private double originLAT;
+    private double originLONG;
+    private double destinationLAT;
+    private double destinationLONG;
+
     private double distance;
 
     private double arrivalTime;
     private double flightDur;
 
-    private double ticketPrice;
-    private double genderDiscount;
-    private double ageDiscount;
-    private double totalCost;
 
     public void flight(){
       this.date = date;
@@ -84,36 +85,37 @@ public class Flight {
         this.flightDur = flightDur;
     }
 
-    public double getTicketPrice() {
-        return ticketPrice;
+
+    public double getOriginLAT() {
+        return originLAT;
     }
 
-    public void setTicketPrice(double ticketPrice) {
-        this.ticketPrice = ticketPrice;
+    public void setOriginLAT(double originLAT) {
+        this.originLAT = originLAT;
     }
 
-    public double getGenderDiscount() {
-        return genderDiscount;
+    public double getOriginLONG() {
+        return originLONG;
     }
 
-    public void setGenderDiscount(double genderDiscount) {
-        this.genderDiscount = genderDiscount;
+    public void setOriginLONG(double originLONG) {
+        this.originLONG = originLONG;
     }
 
-    public double getAgeDiscount() {
-        return ageDiscount;
+    public double getDestinationLAT() {
+        return destinationLAT;
     }
 
-    public void setAgeDiscount(double ageDiscount) {
-        this.ageDiscount = ageDiscount;
+    public void setDestinationLAT(double destinationLAT) {
+        this.destinationLAT = destinationLAT;
     }
 
-    public double getTotalCost() {
-        return totalCost;
+    public double getDestinationLONG() {
+        return destinationLONG;
     }
 
-    public void setTotalCost(double totalCost) {
-        this.totalCost = totalCost;
+    public void setDestinationLONG(double destinationLONG) {
+        this.destinationLONG = destinationLONG;
     }
 }
 
