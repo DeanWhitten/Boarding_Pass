@@ -147,8 +147,9 @@ public class HelloController {
             flight.setDestinationLAT(locations.findLocationLAT(flight.getDestination()));
             flight.setDestinationLONG(locations.findLocationLONG(flight.getDestination()));
             flight.calculateDistance();
+            flight.calculateDuration();
 
-            System.out.println(flight.getOriginLAT() + " " + flight.getOriginLONG() + " Distance in miles " + flight.getDistance());
+            System.out.println(flight.getOriginLAT() + " " + flight.getOriginLONG() + " Distance in miles " + flight.getDistance() + ", Duration in min : " + flight.getFlightDurInMin());
 
             flightEstimateBox.setOpacity(1);
         }

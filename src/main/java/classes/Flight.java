@@ -16,8 +16,8 @@ public class Flight {
 
     private double distance;
 
-    private double arrivalTime;
-    private double flightDur;
+    private LocalTime arrivalTime;
+    private int flightDurInMin;
 
 
     public void flight(){
@@ -69,20 +69,20 @@ public class Flight {
         this.departTime = departTime;
     }
 
-    public double getArrivalTime() {
+    public LocalTime getArrivalTime() {
         return arrivalTime;
     }
 
-    public void setArrivalTime(double arrivalTime) {
+    public void setArrivalTime(LocalTime arrivalTime) {
         this.arrivalTime = arrivalTime;
     }
 
-    public double getFlightDur() {
-        return flightDur;
+    public int getFlightDurInMin() {
+        return flightDurInMin;
     }
 
-    public void setFlightDur(double flightDur) {
-        this.flightDur = flightDur;
+    public void setFlightDurInMin(int flightDurInMin) {
+        this.flightDurInMin = flightDurInMin;
     }
 
 
@@ -139,6 +139,16 @@ public class Flight {
 
     private double rad2deg(double rad) {
         return (rad * 180.0 / Math.PI);
+    }
+
+    public void calculateDuration(){
+        double dist = getDistance();
+        double mph = 500;
+
+        int durInMins = (int) (dist / mph) * 60;
+
+        setFlightDurInMin(durInMins);
+
     }
 }
 
