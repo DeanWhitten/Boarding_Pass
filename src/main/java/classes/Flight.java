@@ -17,7 +17,14 @@ public class Flight {
     private double distance;
 
     private LocalTime arrivalTime;
-    private int flightDurInMin;
+    private int flightDurationMins;
+    private int flightDurationHours;
+
+    private double ticketPrice;
+    private double genderDiscount;
+    private double ageDiscount;
+    private double totalCost;
+
 
 
     public void flight(){
@@ -77,12 +84,12 @@ public class Flight {
         this.arrivalTime = arrivalTime;
     }
 
-    public int getFlightDurInMin() {
-        return flightDurInMin;
+    public int getFlightDurationMins() {
+        return flightDurationMins;
     }
 
-    public void setFlightDurInMin(int flightDurInMin) {
-        this.flightDurInMin = flightDurInMin;
+    public void setFlightDurationMins(int flightDurationMins) {
+        this.flightDurationMins = flightDurationMins;
     }
 
 
@@ -118,6 +125,45 @@ public class Flight {
         this.destinationLONG = destinationLONG;
     }
 
+    public int getFlightDurationHours() {
+        return flightDurationHours;
+    }
+
+    public void setFlightDurationHours(int flightDurationHours) {
+        this.flightDurationHours = flightDurationHours;
+    }
+
+    public double getTicketPrice() {
+        return ticketPrice;
+    }
+
+    public void setTicketPrice(double ticketPrice) {
+        this.ticketPrice = ticketPrice;
+    }
+
+    public double getGenderDiscount() {
+        return genderDiscount;
+    }
+
+    public void setGenderDiscount(double genderDiscount) {
+        this.genderDiscount = genderDiscount;
+    }
+
+    public double getAgeDiscount() {
+        return ageDiscount;
+    }
+
+    public void setAgeDiscount(double ageDiscount) {
+        this.ageDiscount = ageDiscount;
+    }
+
+    public double getTotalCost() {
+        return totalCost;
+    }
+
+    public void setTotalCost(double totalCost) {
+        this.totalCost = totalCost;
+    }
     
     public void calculateDistance(){
         double lat1 = originLAT;
@@ -145,10 +191,23 @@ public class Flight {
         double dist = getDistance();
         double mph = 500;
 
-        int durInMins = (int) (dist / mph) * 60;
+        int totalDurInMins = (int) (dist / mph) * 60;
+        setFlightDurationMins(totalDurInMins);
+        setFlightDurationHours(totalDurInMins/60);
 
-        setFlightDurInMin(durInMins);
+        setArrivalTime(getDepartTime().plusMinutes(totalDurInMins));
+    }
 
+    public void calculateBaseTicketPrice(){
+        double dist = getDistance();
+        double costPerMile = 1.25;
+        
+        setTicketPrice(dist * costPerMile);
+    }
+
+
+    public void calculateDiscounts(int age, String gender) {
+        double basePrice = getTicketPrice();
     }
 }
 

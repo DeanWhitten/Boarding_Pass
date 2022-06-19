@@ -148,8 +148,18 @@ public class HelloController {
             flight.setDestinationLONG(locations.findLocationLONG(flight.getDestination()));
             flight.calculateDistance();
             flight.calculateDuration();
+            flight.calculateBaseTicketPrice();
+            flight.calculateDiscounts(passenger.getAge(), passenger.getGender());
 
-            System.out.println(flight.getOriginLAT() + " " + flight.getOriginLONG() + " Distance in miles " + flight.getDistance() + ", Duration in min : " + flight.getFlightDurInMin());
+            outputFlightTime.setText(String.valueOf(flight.getDepartTime()));
+            outputArrivalTime.setText(String.valueOf(flight.getArrivalTime()));
+            outputFlightDuration.setText(flight.getFlightDurationMins() + "Ms");
+            
+            outputTicketPrice.setText("$" + String.format("%.2f",flight.getTicketPrice()));
+
+
+
+            System.out.println(flight.getOriginLAT() + " " + flight.getOriginLONG() + " Distance in miles " + flight.getDistance());
 
             flightEstimateBox.setOpacity(1);
         }
