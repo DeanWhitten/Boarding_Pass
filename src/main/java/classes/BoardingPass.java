@@ -18,4 +18,8 @@ public class BoardingPass {
     private double genderDiscount;
     private double ageDiscount;
     private double totalCost;
+
+
+
+
 }

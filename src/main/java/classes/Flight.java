@@ -200,7 +200,7 @@ public class Flight {
 
     public void calculateBaseTicketPrice(){
         double dist = getDistance();
-        double costPerMile = 1.25;
+        double costPerMile = .20;
         
         setTicketPrice(dist * costPerMile);
     }
@@ -208,6 +208,24 @@ public class Flight {
 
     public void calculateDiscounts(int age, String gender) {
         double basePrice = getTicketPrice();
+        if(age <= 12){
+           setAgeDiscount(basePrice * .50);
+        } else if (age >= 60 ) {
+           setAgeDiscount(basePrice * .60);
+        }else{
+            setAgeDiscount(0.00);
+        }
+        basePrice -= getAgeDiscount();
+        setTotalCost(basePrice);
+
+        if(gender.equals("female")){
+           setGenderDiscount(basePrice * .25);
+        }else{
+            setGenderDiscount(0.00);
+        }
+
+        basePrice -= getGenderDiscount();
+        setTotalCost(basePrice);
     }
 }
 

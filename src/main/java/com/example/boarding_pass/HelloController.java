@@ -156,10 +156,9 @@ public class HelloController {
             outputFlightDuration.setText(flight.getFlightDurationMins() + "Ms");
             
             outputTicketPrice.setText("$" + String.format("%.2f",flight.getTicketPrice()));
-
-
-
-            System.out.println(flight.getOriginLAT() + " " + flight.getOriginLONG() + " Distance in miles " + flight.getDistance());
+            outputAgeDiscountAmount.setText("-" + String.format("%.2f", flight.getAgeDiscount()));
+            outputLadiesDiscountAmount.setText("-" + String.format("%.2f", flight.getGenderDiscount()));
+            outputTotalCost.setText("$" + String.format("%.2f", flight.getTotalCost()));
 
             flightEstimateBox.setOpacity(1);
         }
@@ -167,6 +166,9 @@ public class HelloController {
     }
 
     public void onBookFlightButtonPress(MouseEvent mouseEvent) {
+        
+
+
     }
 
 
