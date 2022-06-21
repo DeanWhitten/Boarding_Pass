@@ -1,10 +1,7 @@
 package com.example.boarding_pass;
 
 
-import classes.Flight;
-import classes.Locations;
-import classes.Passenger;
-import classes.TravelTimes;
+import classes.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
@@ -21,6 +18,8 @@ public class HelloController {
      TravelTimes tTimes = new TravelTimes();
      Passenger passenger = new Passenger();
      Flight flight = new Flight();
+
+     BoardingPass boardingPass = new BoardingPass();
 
     public GridPane flightEstimateBox;
     public Label outputFlightTime;
@@ -166,8 +165,19 @@ public class HelloController {
     }
 
     public void onBookFlightButtonPress(MouseEvent mouseEvent) {
-        
+       boardingPass.setDate(flight.getDate());
+       boardingPass.setOrigin(flight.getOrigin());
+       boardingPass.setDestination(flight.getDestination());
+       boardingPass.setDepartTime(flight.getDepartTime());
+       boardingPass.setArrivalTime(flight.getArrivalTime());
 
+       boardingPass.setName(passenger.getName());
+       boardingPass.setAge(passenger.getAge());
+       boardingPass.setGender(passenger.getGender());
+       boardingPass.setPhoneNum(passenger.getPhoneNum());
+       boardingPass.setEmail(passenger.getEmail());
+
+       boardingPass.setTotalCost(flight.getTotalCost());
 
     }
 
