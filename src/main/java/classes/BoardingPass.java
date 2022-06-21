@@ -1,9 +1,13 @@
 package classes;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.UUID;
 
 public class BoardingPass {
+    private UUID boardingPassNumber;
     private LocalDate date;
     private String origin;
     private String destination;
@@ -18,6 +22,13 @@ public class BoardingPass {
 
     private double totalCost;
 
+    public UUID getBoardingPassNumber() {
+        return boardingPassNumber;
+    }
+
+    public void setBoardingPassNumber(UUID boardingPassNumber) {
+        this.boardingPassNumber = boardingPassNumber;
+    }
 
     public LocalDate getDate() {
         return date;
@@ -110,9 +121,25 @@ public class BoardingPass {
 
 
 
-    public void createPass(){
+    public void writePassToEntriesFile(){
+        UUID uniqueKey = UUID.randomUUID();
+        setBoardingPassNumber(uniqueKey);
 
+        try {
+            FileWriter myWriter = new FileWriter("src/main/resources/boardingPassEntries.txt");
+            myWriter.write(boardingPassNumber + "*"
+                    + date + "*" + origin + "*" + destination + "*" + arrivalTime
+                    + "*" + name + "*" + email + "*" + phoneNum + "*" +  gender
+                    + "*" + age + "*" + totalCost
+            );
+            myWriter.close();
+            System.out.println("Successfully wrote to the file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
     }
+
 
 
 }

@@ -178,7 +178,7 @@ public class HelloController {
        boardingPass.setEmail(passenger.getEmail());
 
        boardingPass.setTotalCost(flight.getTotalCost());
-
+       boardingPass.writePassToEntriesFile();
     }
 
 
